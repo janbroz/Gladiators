@@ -4,6 +4,7 @@
 #include "Runtime/Engine/Classes/GameFramework/SpringArmComponent.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
 #include "Runtime/Engine/Classes/GameFramework/CharacterMovementComponent.h"
+#include "UnrealNetwork.h"
 
 // Sets default values
 AGladiatorPlayer::AGladiatorPlayer()

@@ -3,5 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UnrealNetwork.h"
-#include "CoreOnline.h"
+
+/**
+ * 
+ */
+class GLADIATORS_API DataStructures
+{
+public:
+	DataStructures();
+	~DataStructures();
+};
