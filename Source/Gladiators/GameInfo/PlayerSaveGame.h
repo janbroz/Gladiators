@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "DataStructures.h"
 #include "PlayerSaveGame.generated.h"
 
 /**
@@ -14,7 +15,10 @@ class GLADIATORS_API UPlayerSaveGame : public USaveGame
 {
 	GENERATED_BODY()
 	
-	
+public:
+
+	UPROPERTY(Replicated)
+		FPlayerInformation PlayerInfo;
 	
 	
 };

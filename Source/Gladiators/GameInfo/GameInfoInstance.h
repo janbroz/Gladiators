@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "UnrealNetwork.h"
+#include "Online.h"
 #include "GameInfoInstance.generated.h"
 
 /**
@@ -16,20 +18,35 @@ class GLADIATORS_API UGameInfoInstance : public UGameInstance
 public:
 	UGameInfoInstance(const FObjectInitializer& ObjectInitializer);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		void CreateMainWidget();
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		void ShowHostMenu();
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		void ShowServerMenu();
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		void ShowOptionsMenu();
-	UFUNCTION()
-		void LaunchLobby(int32 NumberOfPlayers, bool bEnableLan, FText NewServerName);
+	void LaunchLobby(TSharedPtr<const FUniqueNetId> UserId, int32 NumberOfPlayers, bool bEnableLan, bool bIsPresence, FText NewServerName);
+	void JoinServer(TSharedPtr<const FUniqueNetId> UserId, FName SessionName, FOnlineSessionSearchResult &DesiredSession);
+
+	void DestroySessionCaller(APlayerController PC);
+
 	UFUNCTION()
 		void ShowLoadingScreen();
 
+	virtual void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
+	void OnStartOnlineGameComplete(FName SessionName, bool bWasSuccessful);
+
 public:
+	// Delegate for when a session is created
+	FOnCreateSessionCompleteDelegate OnCreateSessionCompleteDelegate;
+	// Delegate for when a session started
+	FOnStartSessionCompleteDelegate OnStartSessionCompleteDelegate;
+
+	/** Handles to registered delegates for creating/starting a session */
+	FDelegateHandle OnCreateSessionCompleteDelegateHandle;
+	FDelegateHandle OnStartSessionCompleteDelegateHandle;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Widgets)
 		TSubclassOf<class UMainMenuWidget> MainMenuClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Widgets)
@@ -46,6 +63,10 @@ public:
 		TSubclassOf<class UOptionsMenuWidget> OptionsMenuClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Widgets)
 		class UOptionsMenuWidget* OptionsMenuWidget;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Widgets)
+		TSubclassOf<class ULoadingScreenWidget> LoadingScreenClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Widgets)
+		class ULoadingScreenWidget* LoadingScreenWidget;
 
 	TSharedPtr<class FOnlineSessionSettings> SessionSettings;
 

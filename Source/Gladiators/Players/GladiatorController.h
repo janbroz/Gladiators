@@ -32,6 +32,13 @@ public:
 	// Character moves vertically to his forward vector
 	void MoveVertical(float Amount);
 
+	// Player presses the left mouse button
+	void LeftMousePressed();
+
+
+	// Player presses the right mouse button
+	void RightMousePressed();
+
 	// The player is constantly aligning the rotation to the mouse location
 	void AlignToMouse();
 

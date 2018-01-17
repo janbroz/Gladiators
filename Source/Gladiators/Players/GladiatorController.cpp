@@ -23,6 +23,9 @@ void AGladiatorController::SetupInputComponent()
 
 	InputComponent->BindAxis("HorizontalMovement", this, &AGladiatorController::MoveHorizontal);
 	InputComponent->BindAxis("VerticalMovement", this, &AGladiatorController::MoveVertical);
+
+	InputComponent->BindAction("LeftMousePressed", IE_Pressed, this, &AGladiatorController::LeftMousePressed);
+	InputComponent->BindAction("RightMousePressed", IE_Pressed, this, &AGladiatorController::RightMousePressed);
 }
 
 void AGladiatorController::BeginPlay()
@@ -80,4 +83,14 @@ void AGladiatorController::AlignToMouse()
 		//GladiatorPawn->SetActorRotation(FRotator(0.f, LerpRot.Yaw, 0.f));
 		//GladiatorPawn->SetActorRotation(FRotator(0.f, NewRot.Yaw, 0.f));
 	}
+}
+
+void AGladiatorController::LeftMousePressed()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Pressed left button"));
+}
+
+void AGladiatorController::RightMousePressed()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Pressed right button"));
 }

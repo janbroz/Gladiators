@@ -3,18 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameMode.h"
-#include "GladiatorsGameMode.generated.h"
+#include "Blueprint/UserWidget.h"
+#include "LoadingScreenWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GLADIATORS_API AGladiatorsGameMode : public AGameMode
+class GLADIATORS_API ULoadingScreenWidget : public UUserWidget
 {
 	GENERATED_BODY()
-public:
-	AGladiatorsGameMode();
+	
 	
 	
 	
